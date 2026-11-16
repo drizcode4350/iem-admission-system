@@ -1,5 +1,13 @@
 const router = require('express').Router();
 const Course = require('../models/Course');
-const { requireAuth } = require('../middleware/auth');
-router.get('/', requireAuth, async (_req, res) => res.json(await Course.find({ isOpen: true }).sort('courseName')));
+
+router.get('/', async (_req, res) => {
+  try {
+    const courses = await Course.find({ isOpen: true }).sort('courseName');
+    res.json(courses);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch courses' });
+  }
+});
+
 module.exports = router;
