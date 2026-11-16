@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Application, Course, User } from './models';
 
-export const API = 'http://localhost:3000/api';
+export const API = 'https://iem-admission-system-fdd2.onrender.com/api';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
