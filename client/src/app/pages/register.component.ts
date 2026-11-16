@@ -36,7 +36,12 @@ export class RegisterComponent {
     this.busy = true; this.error = ''; this.errors = {};
     this.api.register(this.f.getRawValue()).subscribe({
       next: (r) => this.auth.setSession(r.token, r.user),
-      error: (e) => { this.errors = e.error?.errors || {}; this.error = e.error?.message || 'Registration failed'; this.busy = false; },
+      error: (e) => {
+  console.error('Registration error:', e);
+  this.errors = e.error?.errors || {};
+  this.error = `Error ${e.status}: ${e.error?.message || e.message || 'Unknown error'}`;
+  this.busy = false;
+},
     });
   }
 }
